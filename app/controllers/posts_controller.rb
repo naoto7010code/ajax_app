@@ -1,13 +1,16 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all
+    @posts = Post.order(id: "DESC")
   end
 
-  def new
-  end
+  # def new
+  # end
 
   def create
-    Post.create(content: params[:content])
+    # 投稿されたメモの内容を変数postに格納
+    post = Post.create(content: params[:content])
+    # レスポンスで返却されるデータフォーマットにJSONを指定
+    render json:{ post: post }
   end
 end
